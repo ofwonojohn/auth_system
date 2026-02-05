@@ -1,3 +1,13 @@
+package com.auth.auth.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import com.auth.auth.service.UserService;
+
 @Controller
 public class AuthController {
 
@@ -19,7 +29,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestParam String username,
-                           @RequestParam String password) {
+                           @RequestParam String password,
+                           Model model) {
         try {
             userService.register(username, password);
             return "redirect:/";
@@ -32,7 +43,8 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
-                        HttpSession session,) {
+                        HttpSession session,
+                        Model model) {
         try {
             userService.login(username, password);
             return "redirect:/dashboard";
